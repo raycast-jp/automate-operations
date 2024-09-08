@@ -1,7 +1,5 @@
 on:
-  push:
-    tags:
-      - "*"
+  workflow_dispatch:
 
 jobs:
   hello_world_job:
