@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Notion post fetcher
         id: notion-post-fetcher
-        uses: raycast-jp/notion-post-fetcher@v0.0.1
+        uses: raycast-jp/notion-post-fetcher@v0.0.2
         with:
           targetDate: "2024-09-03"
           notion-token: ${{ secrets.NOTION_TOKEN }}
