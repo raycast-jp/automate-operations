@@ -6,11 +6,21 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to test a post tweet action
     steps:
+      - name: Test Local Action
+        id: test-action
+        uses: raycast-jp/notion-post-fetcher@v0.0.1
+        with:
+          targetDate: "2024-09-03"
+          notion-token: ${{ secrets.NOTION_TOKEN }}
+          notion-db-id: ${{ secrets.NOTION_DB_ID }}
+      - name: Print Output Tweet
+        id: output tweet
+        run: echo "${{ steps.test-action.outputs.tweet }}"
       - name: Hello world action step
-        id: hello
+        id: tweetx
         uses: noweh/post-tweet-v2-action@v1.0
         with:
-          message: "Hello world, this is a test"
+          message: ${{ steps.test-action.outputs.tweet }}
           consumer-key: ${{ secrets.TWITTER_CONSUMER_KEY }}
           consumer-secret: ${{ secrets.TWITTER_CONSUMER_SECRET }}
           access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
