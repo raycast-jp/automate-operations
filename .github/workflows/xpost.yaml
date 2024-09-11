@@ -14,7 +14,7 @@ jobs:
           notion-token: ${{ secrets.NOTION_TOKEN }}
           notion-db-id: ${{ secrets.NOTION_DB_ID }}
       - name: Print Output Tweet
-        id: output tweet
+        id: output-tweet
         run: echo "${{ steps.test-action.outputs.tweet }}"
       - name: Hello world action step
         id: tweetx
