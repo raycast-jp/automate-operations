@@ -6,8 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to test a post tweet action
     steps:
-      - name: Test Local Action
-        id: test-action
+      - name: Notion post fetcher
+        id: notion-post-fetcher
         uses: raycast-jp/notion-post-fetcher@v0.0.1
         with:
           targetDate: "2024-09-03"
@@ -16,7 +16,7 @@ jobs:
       - name: Print Output Tweet
         id: output-tweet
         run: echo "${{ steps.test-action.outputs.tweet }}"
-      - name: Hello world action step
+      - name: Post tweet
         id: tweetx
         uses: noweh/post-tweet-v2-action@v1.0
         with:
