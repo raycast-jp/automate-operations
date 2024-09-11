@@ -1,9 +1,14 @@
 on:
+  schedule:
+    # JST 9:00 AM every day (which is UTC 0:00 AM)
+    - cron: "0 12 * * *"
   workflow_dispatch:
 
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Tokyo
     name: A job to test a post tweet action
     steps:
       - name: Get current date
