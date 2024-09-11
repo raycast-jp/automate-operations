@@ -1,6 +1,6 @@
 on:
   schedule:
-    # JST 9:00 AM every day (which is UTC 0:00 AM)
+    # JST 9:00 PM every day (which is UTC 12:00 AM)
     - cron: "0 12 * * *"
   workflow_dispatch:
 
