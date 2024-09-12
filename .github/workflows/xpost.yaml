@@ -25,13 +25,16 @@ jobs:
         run: echo "${{ steps.notion-post-fetcher.outputs.tweet }}"
       - name: Post tweet
         id: tweetx
-        uses: noweh/post-tweet-v2-action@v1.0
+        uses: raycast-jp/post-tweet-v2-action@v0.0.0
         with:
           message: ${{ steps.notion-post-fetcher.outputs.tweet }}
           consumer-key: ${{ secrets.TWITTER_CONSUMER_KEY }}
           consumer-secret: ${{ secrets.TWITTER_CONSUMER_SECRET }}
           access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
           access-token-secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+      - name: Print Output Published TweetID
+        id: output-published-tweet-id
+        run: echo "${{ steps.tweetx.outputs.tweetID }}"
       - name: Post to a Slack channel
         id: slack
         uses: slackapi/slack-github-action@v1.27.0
@@ -41,7 +44,8 @@ jobs:
           # You can pass in multiple channels to post to by providing a comma-delimited list of channel IDs.
           channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
           # For posting a simple plain text message
-          slack-message: "只今ツイートしましたのでいいね、リツイートなどリアクションお願いします！！"
+          slack-message: "只今ツイートしましたのでいいね、リツイートなどリアクションお願いします！！\nhttps://x.com/Raycast0731/status/${{ steps.tweetx.outputs.tweetID }}"
+          slack: "任意の文字列と"
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       # Use the output from the `hello` step
