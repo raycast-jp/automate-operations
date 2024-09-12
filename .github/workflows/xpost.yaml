@@ -45,7 +45,6 @@ jobs:
           channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
           # For posting a simple plain text message
           slack-message: "只今ツイートしましたのでいいね、リツイートなどリアクションお願いします！！\nhttps://x.com/Raycast0731/status/${{ steps.tweetx.outputs.tweetID }}"
-          slack: "任意の文字列と"
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       # Use the output from the `hello` step
