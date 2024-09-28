@@ -50,3 +50,12 @@ jobs:
       # Use the output from the `hello` step
       - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.time }}"
+      - name: Notify error via slack
+        if: failure() 
+        id: slack
+        uses: slackapi/slack-github-action@v1.27.0
+        with:
+          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+          slack-message: "投稿に失敗しました。エラー内容を確認してください: ${{ steps.tweetx.outputs.postFailed }}"
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
