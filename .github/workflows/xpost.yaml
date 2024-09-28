@@ -49,7 +49,7 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       # Use the output from the `hello` step
       - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+        run: echo "it was succeeded on ${{ steps.hello.outputs.time }}"
       - name: Notify error via slack
         if: failure() 
         id: slack
