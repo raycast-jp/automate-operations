@@ -25,7 +25,7 @@ jobs:
         run: echo "${{ steps.notion-post-fetcher.outputs.tweet }}"
       - name: Post tweet
         id: tweetx
-        uses: raycast-jp/post-tweet-v2-action@v0.0.2
+        uses: raycast-jp/post-tweet-v2-action@v0.0.3
         with:
           message: ${{ steps.notion-post-fetcher.outputs.tweet }}
           consumer-key: ${{ secrets.TWITTER_CONSUMER_KEY }}
