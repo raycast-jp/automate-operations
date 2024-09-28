@@ -52,7 +52,7 @@ jobs:
         run: echo "it was succeeded on ${{ steps.hello.outputs.time }}"
       - name: Notify error via slack
         if: failure() 
-        id: slack
+        id: error-notifier
         uses: slackapi/slack-github-action@v1.27.0
         with:
           channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
