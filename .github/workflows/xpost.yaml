@@ -20,18 +20,20 @@ jobs:
           targetDate: ${{ env.CURRENT_DATE }}
           notion-token: ${{ secrets.NOTION_TOKEN }}
           notion-db-id: ${{ secrets.NOTION_DB_ID }}
-      - name: Print Output Tweet
-        id: output-tweet
+      - name: Print Output Tweet Content
+        id: output-tweet-content
         run: |
-          content="${{ steps.notion-post-fetcher.outputs.tweet.content }}"
-          media="${{ steps.notion-post-fetcher.outputs.tweet.media }}"
-          echo "{\"content\":\"$content\",\"media\":\"$media\"}"
+          echo "Tweet Content: ${{ fromJson(steps.notion-post-fetcher.outputs.tweet).content }}"
+      - name: Print Output Tweet Media
+        id: output-tweet-media
+        run: |
+          echo "Tweet Media: ${{ fromJson(steps.notion-post-fetcher.outputs.tweet).media }}"
       - name: Post tweet
         id: tweetx
         uses: raycast-jp/post-tweet-v2-action@v0.0.8
         with:
-          message: ${{ steps.notion-post-fetcher.outputs.tweet.content }}
-          image: ${{ steps.notion-post-fetcher.outputs.tweet.media }}
+          message: ${{ fromJson(steps.notion-post-fetcher.outputs.tweet).content }}
+          image: ${{ fromJson(steps.notion-post-fetcher.outputs.tweet).media }}
           consumer-key: ${{ secrets.TWITTER_CONSUMER_KEY }}
           consumer-secret: ${{ secrets.TWITTER_CONSUMER_SECRET }}
           access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
