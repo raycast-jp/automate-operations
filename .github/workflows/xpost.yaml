@@ -15,7 +15,7 @@ jobs:
         run: echo "CURRENT_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Notion post fetcher
         id: notion-post-fetcher
-        uses: raycast-jp/notion-post-fetcher@v0.0.3
+        uses: raycast-jp/notion-post-fetcher@v0.0.4
         with:
           targetDate: ${{ env.CURRENT_DATE }}
           notion-token: ${{ secrets.NOTION_TOKEN }}
@@ -25,9 +25,10 @@ jobs:
         run: echo "${{ steps.notion-post-fetcher.outputs.tweet }}"
       - name: Post tweet
         id: tweetx
-        uses: raycast-jp/post-tweet-v2-action@v0.0.4
+        uses: raycast-jp/post-tweet-v2-action@v0.0.5
         with:
-          message: ${{ steps.notion-post-fetcher.outputs.tweet }}
+          message: ${{ steps.notion-post-fetcher.outputs.tweet.content }}
+          image: ${{ steps.notion-post-fetcher.outputs.tweet.media }}
           consumer-key: ${{ secrets.TWITTER_CONSUMER_KEY }}
           consumer-secret: ${{ secrets.TWITTER_CONSUMER_SECRET }}
           access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
