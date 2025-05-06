@@ -15,20 +15,20 @@ jobs:
         run: echo "CURRENT_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Notion post fetcher
         id: notion-post-fetcher
-        uses: raycast-jp/notion-post-fetcher@v0.0.4
+        uses: raycast-jp/notion-post-fetcher@v0.0.5
         with:
           targetDate: ${{ env.CURRENT_DATE }}
           notion-token: ${{ secrets.NOTION_TOKEN }}
           notion-db-id: ${{ secrets.NOTION_DB_ID }}
       - name: Print Output Tweet
         id: output-tweet
-        run: echo "${{ steps.notion-post-fetcher.outputs.tweet.content }}, ${{ steps.notion-post-fetcher.outputs.tweet.media[0] }}"
+        run: echo "${{ steps.notion-post-fetcher.outputs.tweet.content }}, ${{ steps.notion-post-fetcher.outputs.tweet.media }}"
       - name: Post tweet
         id: tweetx
         uses: raycast-jp/post-tweet-v2-action@v0.0.8
         with:
           message: ${{ steps.notion-post-fetcher.outputs.tweet.content }}
-          image: ${{ steps.notion-post-fetcher.outputs.tweet.media[0] }}
+          image: ${{ steps.notion-post-fetcher.outputs.tweet.media }}
           consumer-key: ${{ secrets.TWITTER_CONSUMER_KEY }}
           consumer-secret: ${{ secrets.TWITTER_CONSUMER_SECRET }}
           access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
