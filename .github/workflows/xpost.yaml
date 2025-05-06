@@ -25,7 +25,7 @@ jobs:
         run: echo "${{ steps.notion-post-fetcher.outputs.tweet.content }}, ${{ steps.notion-post-fetcher.outputs.tweet.media[0] }}"
       - name: Post tweet
         id: tweetx
-        uses: raycast-jp/post-tweet-v2-action@v0.0.7
+        uses: raycast-jp/post-tweet-v2-action@v0.0.8
         with:
           message: ${{ steps.notion-post-fetcher.outputs.tweet.content }}
           image: ${{ steps.notion-post-fetcher.outputs.tweet.media[0] }}
