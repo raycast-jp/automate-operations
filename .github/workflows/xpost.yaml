@@ -22,13 +22,13 @@ jobs:
           notion-db-id: ${{ secrets.NOTION_DB_ID }}
       - name: Print Output Tweet
         id: output-tweet
-        run: echo "${{ steps.notion-post-fetcher.outputs.tweet }}"
+        run: echo "${{ steps.notion-post-fetcher.outputs.tweet.content }}, ${steps.notion-post-fetcher.outputs.tweet.media[0]}"
       - name: Post tweet
         id: tweetx
         uses: raycast-jp/post-tweet-v2-action@v0.0.6
         with:
           message: ${{ steps.notion-post-fetcher.outputs.tweet.content }}
-          image: ${{ steps.notion-post-fetcher.outputs.tweet.media }}
+          image: ${{ steps.notion-post-fetcher.outputs.tweet.media[0] }}
           consumer-key: ${{ secrets.TWITTER_CONSUMER_KEY }}
           consumer-secret: ${{ secrets.TWITTER_CONSUMER_SECRET }}
           access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
