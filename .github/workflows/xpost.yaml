@@ -22,7 +22,8 @@ jobs:
           notion-db-id: ${{ secrets.NOTION_DB_ID }}
       - name: Print Output Tweet
         id: output-tweet
-        run: echo "${{ steps.notion-post-fetcher.outputs.tweet }}"
+        run: |
+          echo '{"content":"${{ steps.notion-post-fetcher.outputs.tweet.content }}","media":"${{ steps.notion-post-fetcher.outputs.tweet.media }}"}'
       - name: Post tweet
         id: tweetx
         uses: raycast-jp/post-tweet-v2-action@v0.0.8
