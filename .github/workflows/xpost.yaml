@@ -43,7 +43,7 @@ jobs:
         run: echo "${{ steps.tweetx.outputs.tweetID }}"
       - name: Post to a Slack channel
         id: slack
-        uses: slackapi/slack-github-action@v1.27.0
+        uses: slackapi/slack-github-action@v2.1.1
         with:
           # Slack channel id, channel name, or user id to post message.
           # See also: https://api.slack.com/methods/chat.postMessage#channels
@@ -59,7 +59,7 @@ jobs:
       - name: Notify error via slack
         if: failure() 
         id: error-notifier
-        uses: slackapi/slack-github-action@v1.27.0
+        uses: slackapi/slack-github-action@v2.1.1
         with:
           channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
           slack-message: "投稿に失敗しました。エラー内容を確認してください: ${{ steps.tweetx.outputs.postFailed }} \n 実行結果の詳細はこちら: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
