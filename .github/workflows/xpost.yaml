@@ -15,7 +15,7 @@ jobs:
         run: echo "CURRENT_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Notion post fetcher
         id: notion-post-fetcher
-        uses: raycast-jp/notion-post-fetcher@v0.0.6
+        uses: raycast-jp/notion-post-fetcher@v0.0.7
         with:
           targetDate: ${{ env.CURRENT_DATE }}
           notion-token: ${{ secrets.NOTION_TOKEN }}
