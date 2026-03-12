@@ -30,7 +30,7 @@ jobs:
           echo "Tweet Media: ${{ fromJson(steps.notion-post-fetcher.outputs.tweet).media }}"
       - name: Post tweet
         id: tweetx
-        uses: raycast-jp/post-tweet-v2-action@v0.1.0
+        uses: raycast-jp/post-tweet-v2-action@v0.1.2
         with:
           message: ${{ fromJson(steps.notion-post-fetcher.outputs.tweet).content }}
           media: ${{ fromJson(steps.notion-post-fetcher.outputs.tweet).media }}
