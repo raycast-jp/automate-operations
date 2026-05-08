@@ -43,7 +43,7 @@ jobs:
         run: echo "${{ steps.tweetx.outputs.tweetID }}"
       - name: Post to a Slack channel
         id: slack
-        uses: slackapi/slack-github-action@v2.1.1
+        uses: slackapi/slack-github-action@v3.0.3
         with:
           method: chat.postMessage
           token: ${{ secrets.SLACK_BOT_TOKEN }}
@@ -56,7 +56,7 @@ jobs:
       - name: Notify error via slack
         if: failure()
         id: error-notifier
-        uses: slackapi/slack-github-action@v2.1.1
+        uses: slackapi/slack-github-action@v3.0.3
         with:
           method: chat.postMessage
           token: ${{ secrets.SLACK_BOT_TOKEN }}
