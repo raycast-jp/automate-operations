@@ -15,7 +15,7 @@ jobs:
         run: echo "CURRENT_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Notion post fetcher
         id: notion-post-fetcher
-        uses: raycast-jp/notion-post-fetcher@v0.0.7
+        uses: raycast-jp/notion-post-fetcher@v0.1.0
         with:
           targetDate: ${{ env.CURRENT_DATE }}
           notion-token: ${{ secrets.NOTION_TOKEN }}
@@ -28,12 +28,22 @@ jobs:
         id: output-tweet-media
         run: |
           echo "Tweet Media: ${{ fromJson(steps.notion-post-fetcher.outputs.tweet).media }}"
+      - name: Print Output Thread Content
+        id: output-thread-content
+        run: |
+          echo "Thread Content: ${{ fromJson(steps.notion-post-fetcher.outputs.tweet).thread.content }}"
+      - name: Print Output Thread Media
+        id: output-thread-media
+        run: |
+          echo "Thread Media: ${{ fromJson(steps.notion-post-fetcher.outputs.tweet).thread.media }}"
       - name: Post tweet
         id: tweetx
-        uses: raycast-jp/post-tweet-v2-action@v0.1.2
+        uses: raycast-jp/post-tweet-v2-action@v0.2.0
         with:
           message: ${{ fromJson(steps.notion-post-fetcher.outputs.tweet).content }}
           media: ${{ fromJson(steps.notion-post-fetcher.outputs.tweet).media }}
+          thread-message: ${{ fromJson(steps.notion-post-fetcher.outputs.tweet).thread.content }}
+          thread-media: ${{ fromJson(steps.notion-post-fetcher.outputs.tweet).thread.media }}
           consumer-key: ${{ secrets.TWITTER_CONSUMER_KEY }}
           consumer-secret: ${{ secrets.TWITTER_CONSUMER_SECRET }}
           access-token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
