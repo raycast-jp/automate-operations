@@ -1,0 +1,13 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/xpost",
+      "schedule": "21 10 * * *"
+    }
+  ],
+  "functions": {
+    "api/cron/xpost.js": {
+      "maxDuration": 360
+    }
+  }
+}

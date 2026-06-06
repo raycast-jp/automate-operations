@@ -1,6 +1,7 @@
 on:
-  schedule:
-    - cron: "21 10 * * *"
+  # NOTE: 一時的に Vercel Cron (PAT 経由の workflow_dispatch) から起動するためコメントアウト
+  # schedule:
+  #   - cron: "21 10 * * *"
   workflow_dispatch:
 
 jobs:
