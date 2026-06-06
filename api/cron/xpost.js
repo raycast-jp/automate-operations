@@ -11,7 +11,9 @@ const MAX_DELAY_MINUTES = Number(process.env.MAX_DELAY_MINUTES ?? 5);
 
 export default async function handler(req, res) {
   // Vercel Cron は CRON_SECRET を Authorization ヘッダーに付与して呼び出す
-  if (req.headers.authorization !== `Bearer ${process.env.CRON_SECRET}`) {
+  // CRON_SECRET 未設定時はフェイルクローズ（"Bearer undefined" での認証突破を防ぐ）
+  const secret = process.env.CRON_SECRET;
+  if (!secret || req.headers.authorization !== `Bearer ${secret}`) {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
